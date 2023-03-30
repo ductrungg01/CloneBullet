@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class ConfigurationUtil
 {
-    public static float _bulletSpeed = 500.0f;
+    public static float _bulletSpeed = 250.0f;
     public static int _bulletBounce = 5;
 
     public static float BulletSpeed

@@ -9,11 +9,9 @@ public class EnemyCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Bullet va cham Enemy");
             GetComponent<Enemy>().Dead();
         } else if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Enemy va cham Player");
             GetComponent<Enemy>().Attack();
         }
     }
