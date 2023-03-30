@@ -54,6 +54,8 @@ public class PlayerShooting : MonoBehaviour
 
     void SpawnBullet(Vector3 hitPoint)
     {
+        AudioManager.Instance.PlaySoundEffect("gun-shooting");
+        
         Vector3 bulletDir = hitPoint - this.transform.position;
         bulletDir.y = 0;
 

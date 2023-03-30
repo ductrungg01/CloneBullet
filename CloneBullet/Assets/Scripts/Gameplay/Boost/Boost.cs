@@ -49,6 +49,8 @@ public class Boost : MonoBehaviour
                 Quaternion.identity);
 
             newBullet.GetComponent<Rigidbody>().velocity = velocity;
+            
+            AudioManager.Instance.PlaySoundEffect("bullet-cloned");
 
             boostValue--;
             ShowValue();

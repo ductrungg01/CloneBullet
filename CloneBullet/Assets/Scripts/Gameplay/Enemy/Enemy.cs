@@ -56,6 +56,8 @@ public class Enemy : MonoBehaviour
         enemyMoving.enabled = false;
         enemyCollision.enabled = false;
         animator.SetTrigger("Dead");
+        
+        AudioManager.Instance.PlaySoundEffect("normal-enemy-dead");
 
         await UniTask.Delay(TimeSpan.FromSeconds(3));
         
