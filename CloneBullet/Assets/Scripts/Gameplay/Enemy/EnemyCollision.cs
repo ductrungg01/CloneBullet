@@ -9,9 +9,22 @@ public class EnemyCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
+            Debug.Log("Enemy dead");
             GetComponent<Enemy>().Dead();
-        } else if (collision.gameObject.CompareTag("Player"))
+        }
+        
+        if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Enemy attack player");
+            GetComponent<Enemy>().Attack();
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Enemy attack player");
             GetComponent<Enemy>().Attack();
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,11 +12,23 @@ public class Enemy : MonoBehaviour
     public EnemyMovement enemyMoving;
     public EnemyCollision enemyCollision;
     public Animator animator;
+    public NavMeshAgent navMeshAgent;
 
     private void Start()
     {
         Appear();
     }
+
+    private void Update()
+    {
+        float detectionRange = 25f;
+        float distanceToPlayer = Vector3.Distance(transform.position, GameManager.Instance.playerInstance.transform.position);
+        if (distanceToPlayer <= detectionRange)
+        {
+            Attack();
+        }
+    }
+    
 
     public async UniTask Appear()
     {
@@ -39,6 +52,7 @@ public class Enemy : MonoBehaviour
 
     async public void Dead()
     {
+        navMeshAgent.SetDestination(this.transform.position);
         enemyMoving.enabled = false;
         enemyCollision.enabled = false;
         animator.SetTrigger("Dead");
@@ -50,12 +64,15 @@ public class Enemy : MonoBehaviour
     
     async public void Attack()
     {
+        navMeshAgent.SetDestination(this.transform.position);
         enemyMoving.enabled = false;
         enemyCollision.enabled = false;
         animator.SetTrigger("Attack");
+        GameManager.Instance.playerInstance.GetComponent<Player>().BeAttacked();
 
         await UniTask.Delay(TimeSpan.FromSeconds(3));
 
-        Destroy(this.gameObject);
+        animator.SetTrigger("Idle");
+
     }
 }
