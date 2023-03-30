@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
 {
     public LineRenderer lightOfSight;
     public Animator anim;
+    public Transform bulletPosStart;
     async void Update()
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,10 +48,11 @@ public class PlayerShooting : MonoBehaviour
         bulletDir.y = 0;
 
         GameObject bullet = PoolManager.Instance.bullet.OnTakeFromPool(
-            this.transform.position,
+            bulletPosStart.position,
             Quaternion.identity);
-
-        PoolManager.Instance.bullet.OnReturnToPool(bullet, 20f);
+        bullet.GetComponent<Bullet>().bounceRemain = ConfigurationUtil.BulletBounce;
+        
+        PoolManager.Instance.bullet.OnReturnToPool(bullet, 15f);
 
         // Set bullet's velocity
         bullet.GetComponentInChildren<Rigidbody>().velocity = bulletDir.normalized * ConfigurationUtil.BulletSpeed;
