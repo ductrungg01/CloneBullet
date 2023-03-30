@@ -9,8 +9,10 @@ public class EnemyMovement : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
 
-    private void Update()
+    private void Start()
     {
-        navMeshAgent.SetDestination(new Vector3(0, 0, 0));
+        Vector3 playerPos = GameManager.Instance.playerInstance.transform.position;
+        
+        navMeshAgent.SetDestination(playerPos);
     }
 }

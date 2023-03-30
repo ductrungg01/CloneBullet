@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         enemyCollision.enabled = false;
         animator.SetTrigger("Idle");
         
-        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
         
         EnemyGo();
     }
@@ -35,5 +35,27 @@ public class Enemy : MonoBehaviour
         enemyMoving.enabled = true;
         enemyCollision.enabled = true;
         animator.SetTrigger("Walking");
+    }
+
+    async public void Dead()
+    {
+        enemyMoving.enabled = false;
+        enemyCollision.enabled = false;
+        animator.SetTrigger("Dead");
+
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
+        
+        Destroy(this.gameObject);
+    }
+    
+    async public void Attack()
+    {
+        enemyMoving.enabled = false;
+        enemyCollision.enabled = false;
+        animator.SetTrigger("Attack");
+
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
+
+        Destroy(this.gameObject);
     }
 }
