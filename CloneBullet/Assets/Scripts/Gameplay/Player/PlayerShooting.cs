@@ -9,8 +9,18 @@ public class PlayerShooting : MonoBehaviour
     public LineRenderer lightOfSight;
     public Animator anim;
     public Transform bulletPosStart;
+
+    public Player player;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+    }
+
     async void Update()
     {
+        if (player.isDead) return;
+        
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 

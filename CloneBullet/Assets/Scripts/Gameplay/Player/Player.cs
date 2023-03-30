@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Animator anim;
-    private bool isDead = false;
+    public bool isDead = false;
     public void BeAttacked()
     {
         if (isDead) return;
