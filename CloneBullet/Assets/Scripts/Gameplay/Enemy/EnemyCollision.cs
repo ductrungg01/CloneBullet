@@ -5,12 +5,30 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
+    private Enemy enemy;
+    private int healthForBoss = 10;
+
+    private void Start()
+    {
+        enemy = GetComponent<Enemy>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        //if (enemy.isDead) return;
+        
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Enemy dead");
-            GetComponent<Enemy>().Dead();
+            if ((enemy.isBoss && healthForBoss <= 0) || enemy.isBoss == false)
+            {
+                if (enemy.isBoss)
+                {
+                    this.transform.localScale -= new Vector3(50, 50, 50);
+                }
+                Debug.Log("Enemy dead");
+                GetComponent<Enemy>().Dead();
+            }
+            healthForBoss--;
         }
         
         if (collision.gameObject.CompareTag("Player"))

@@ -11,6 +11,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        if (GetComponent<Enemy>().isBoss)
+        {
+            navMeshAgent.speed *= 2;
+        }
+        
         Vector3 playerPos = GameManager.Instance.playerInstance.transform.position;
         
         navMeshAgent.SetDestination(playerPos);

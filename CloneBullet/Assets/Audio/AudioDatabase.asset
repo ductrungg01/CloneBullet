@@ -12,5 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37caecd41165664bbce865fd8beafab, type: 3}
   m_Name: AudioDatabase
   m_EditorClassIdentifier: 
-  _backgroundMusics: []
-  _soundEffects: []
+  _backgroundMusics:
+  - id: background
+    clip: {fileID: 8300000, guid: be3b74ca1eb655546ae34bd06d67c1a4, type: 3}
+  _soundEffects:
+  - id: boss-dead
+    clip: {fileID: 8300000, guid: eb2a7c63add08644a963a7a6bf391965, type: 3}
+  - id: normal-enemy-dead
+    clip: {fileID: 8300000, guid: 2a25ab416790fe5428e77074dd4664b3, type: 3}
+  - id: bullet-cloned
+    clip: {fileID: 8300000, guid: 72fbf9abbe75aef4fbeaab60ca25d449, type: 3}
+  - id: button-click
+    clip: {fileID: 8300000, guid: ee5360ec24cfa684dad0680a814db2a0, type: 3}
+  - id: gun-shooting
+    clip: {fileID: 8300000, guid: b40981142c9bc9342933b299f27b23af, type: 3}
+  - id: game-over
+    clip: {fileID: 8300000, guid: ac6910d876125e6448d55fdd07e07694, type: 3}
+  - id: player-dead
+    clip: {fileID: 8300000, guid: a1e61a6bd6e0562408682c701347c753, type: 3}

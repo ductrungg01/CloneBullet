@@ -42,7 +42,7 @@ public class Boost : MonoBehaviour
         
         for (int i = boostValue; i > 0; i--)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.07f));
 
             GameObject newBullet = PoolManager.Instance.bullet.OnTakeFromPool(
                 this.transform.position,
