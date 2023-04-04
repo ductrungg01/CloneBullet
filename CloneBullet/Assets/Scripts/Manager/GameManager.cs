@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject boostPrefab;
     public List<Transform> boostPosList = new List<Transform>();
+
+    public TextMeshProUGUI roundText;
+    private int round = 0;
 
     private List<GameObject> enemyList = new List<GameObject>();
     private List<GameObject> boostList = new List<GameObject>();
@@ -62,13 +66,18 @@ public class GameManager : MonoBehaviour
 
         SpawnEnemy();
         SpawnBoost();
+
+        round++;
+        roundText.text = "Round " + round.ToString();
         
-        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        await UniTask.Delay(TimeSpan.FromSeconds(3f));
         
     }
 
     private async UniTask RoundPlaying()
     {
+        roundText.text = "";
+        
         while (!IsPlayerDead() && EnemyRemain() != 0)
         {
             if (EnemyRemain() < 3 && respawnCounting == false)
@@ -83,8 +92,13 @@ public class GameManager : MonoBehaviour
 
     private async UniTask RoundEnding()
     {
-        Debug.Log("You are in ending round");
-        await UniTask.Delay(TimeSpan.FromSeconds(5f));
+        if (IsPlayerDead())
+        {
+            roundText.text = "Gameover";
+            round = 0;
+        }
+
+        await UniTask.Delay(TimeSpan.FromSeconds(3f));
     }
     
     private bool IsPlayerDead()

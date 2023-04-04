@@ -10,13 +10,11 @@ public class EnemyCollision : MonoBehaviour
 
     private void Start()
     {
-        enemy = GetComponent<Enemy>();
+        enemy = this.gameObject.GetComponent<Enemy>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (enemy.isDead) return;
-        
         if (collision.gameObject.CompareTag("Bullet"))
         {
             if ((enemy.isBoss && healthForBoss <= 0) || enemy.isBoss == false)
@@ -25,7 +23,6 @@ public class EnemyCollision : MonoBehaviour
                 {
                     this.transform.localScale -= new Vector3(50, 50, 50);
                 }
-                Debug.Log("Enemy dead");
                 GetComponent<Enemy>().Dead();
             }
             healthForBoss--;
@@ -33,16 +30,6 @@ public class EnemyCollision : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Enemy attack player");
-            GetComponent<Enemy>().Attack();
-        }
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Enemy attack player");
             GetComponent<Enemy>().Attack();
         }
     }
